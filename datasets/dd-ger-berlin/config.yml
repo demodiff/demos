@@ -1,0 +1,52 @@
+name: dd-ger-berlin
+title: Versammlungen im Land Berlin
+publisher:
+  name: Polizei Berlin
+  url: https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/
+extract:
+  sources:
+    - uri: https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.csv
+      pandas:
+        read:
+          options:
+            sep: ";"
+            encoding: latin
+            dtype: str
+transform:
+  queries:
+    - entities:
+        event:
+          schema: Event
+          key_literal: dd-ger-berlin
+          keys:
+            - id
+            - datum 
+            - von
+            - bis
+            - thema
+            - plz
+            - strasse_nr
+            - aufzugsstrecke
+            - lfdnr
+          properties:
+            name:
+              column: thema
+            date:
+              column: datum
+            startDate:
+              columns:
+                - datum
+                - von
+            endDate:
+              columns:
+                - datum
+                - bis
+            description:
+              column: aufzugsstrecke
+            location:
+              columns:
+                - plz
+                - strasse_nr
+            locationMentioned:
+              columns:
+                - aufzugsstrecke

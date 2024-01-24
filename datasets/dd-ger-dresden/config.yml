@@ -1,0 +1,40 @@
+name: dd-ger-berlin
+title: Versammlungen in Dresden
+publisher:
+  name: SG Veranstaltungs- und Versammlungsbehörde
+  url: https://www.dresden.de/de/rathaus/dienstleistungen/versammlungsuebersicht.php
+extract:
+  sources:
+    - uri: https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json
+      pandas:
+        read:
+          options:
+            orient: "Versammlungen"
+            encoding: latin
+            dtype: str
+            typ: frame
+transform:
+  queries:
+    - entities:
+        event:
+          schema: Event
+          key_literal: dd-ger-dresden
+          keys:
+            - id
+          properties:
+            name:
+              column: Thema
+            date:
+              columns:
+                - Datum
+                - Zeit
+            location:
+              columns:
+                - Ort
+                - Startpunkt
+            description:
+              columns:
+                - Teilnehmer
+                - Status
+            organizer:
+              column: Veranstalter
