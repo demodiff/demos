@@ -20,7 +20,7 @@ transform:
           key_literal: dd-ger-berlin
           keys:
             - id
-            - datum 
+            - datum
             - von
             - bis
             - thema
