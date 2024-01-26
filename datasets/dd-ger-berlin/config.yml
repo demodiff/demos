@@ -50,3 +50,6 @@ transform:
             locationMentioned:
               columns:
                 - aufzugsstrecke
+load:
+  index_uri: s3://data.demodiff.de/dd-ger-berlin/index-${DATE}.json
+  entities_uri: s3://data.demodiff.de/dd-ger-berlin/entities-${DATE].ftm.json

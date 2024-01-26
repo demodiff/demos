@@ -48,4 +48,4 @@ jobs:
           # - dd-ger-dresden
     steps:
       - name: parse and write the datasets
-        run: "investigraph run -c /datasets/${{ matrix.dataset }}/config.yml"
+        run: "DATE=`date '+%Y%m%d%H%M%S'` investigraph run -c /datasets/${{ matrix.dataset }}/config.yml"
