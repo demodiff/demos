@@ -1,4 +1,4 @@
-FROM ghcr.io/investigativedata/investigraph:main
+FROM ghcr.io/riotbib/investigraph:main
 
 USER root
 RUN pip uninstall -y followthemoney
