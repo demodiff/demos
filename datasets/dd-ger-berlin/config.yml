@@ -51,5 +51,5 @@ transform:
               columns:
                 - aufzugsstrecke
 load:
-  index_uri: s3://demodiff/dd-ger-berlin/index-${DATE}.json
-  entities_uri: s3://demodiff/dd-ger-berlin/entities-${DATE}.ftm.json
+  index_uri: s3://demodiff/dd-ger-berlin/index-DATE.json
+  entities_uri: s3://demodiff/dd-ger-berlin/entities-DATE.ftm.json
