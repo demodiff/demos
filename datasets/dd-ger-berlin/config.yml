@@ -13,43 +13,7 @@ extract:
             encoding: latin
             dtype: str
 transform:
-  queries:
-    - entities:
-        event:
-          schema: Event
-          key_literal: dd-ger-berlin
-          keys:
-            - id
-            - datum
-            - von
-            - bis
-            - thema
-            - plz
-            - strasse_nr
-            - aufzugsstrecke
-            - lfdnr
-          properties:
-            name:
-              column: thema
-            date:
-              column: datum
-            startDate:
-              columns:
-                - datum
-                - von
-            endDate:
-              columns:
-                - datum
-                - bis
-            description:
-              column: aufzugsstrecke
-            location:
-              columns:
-                - plz
-                - strasse_nr
-            locationMentioned:
-              columns:
-                - aufzugsstrecke
+  handler: /datasets/dd-ger-berlin/transform.py:handle
 load:
   index_uri: s3://demodiff/dd-ger-berlin/index-DATE.json
   entities_uri: s3://demodiff/dd-ger-berlin/entities-DATE.ftm.json
