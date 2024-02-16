@@ -1,4 +1,4 @@
-name: aggregater
+name: aggregate
 
 on:
   push: {}
@@ -8,7 +8,7 @@ on:
       - completed
 
 jobs:
-  build:
+  aggregate:
     runs-on: ubuntu-latest
 
     steps:
