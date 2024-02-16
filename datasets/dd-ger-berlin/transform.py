@@ -2,12 +2,16 @@ from typing import Any, Generator
 from nomenklatura.entity import CE
 
 from investigraph.model import Context
+from investigraph.util import make_proxy
 
 from hashlib import sha1
 from datetime import datetime
 
-def handle(ctx: Context, record: dict[str, Any], ix: int) -> Generator[CE, None, None]:
-    proxy = ctx.make_proxy("Event")
+
+def handle(ctx: Context, data: dict[str, Any], ix: int):
+    slug = "dd-ger-berlin"
+    id_ = join_slug(ctx.prefix, slug)
+    proxy = make_proxy("Event", id_)
 
     proxy.id = sha1(str(record).lower().strip().encode()).hexdigest()
 
