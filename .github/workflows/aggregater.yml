@@ -1,0 +1,32 @@
+name: aggregater
+
+on:
+  push: {}
+  workflow_run:
+    workflows: ["scraper"]
+    types:
+      - completed
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.9'
+        cache: 'pip'
+    - run: pip install -r requirements.txt
+    - run: mkdir data-{remote,local}
+    - run: aws s3 cp s3://demodiff/dd-ger-berlin/ data-remote/ --recursive
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_ENDPOINT_URL: ${{ secrets.FSSPEC_S3_ENDPOINT_URL }} 
+    - run: cat data-remote/entities*.ftm.json | ftm aggregate > data-local/entities.ftm.json
+    - run: aws s3 cp data-local/entities.ftm.json s3://demodiff/dd-ger-berlin-full/entities.ftm.json
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_ENDPOINT_URL: ${{ secrets.FSSPEC_S3_ENDPOINT_URL }} 
