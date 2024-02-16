@@ -4,6 +4,8 @@ from nomenklatura.entity import CE
 from investigraph.model import Context
 from investigraph.util import make_proxy
 
+from ftmq.util import join_slug
+
 from hashlib import sha1
 from datetime import datetime
 
