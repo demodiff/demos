@@ -12,7 +12,7 @@ def handle(ctx: Context, data: dict[str, Any], ix: int):
     id_ = ctx.make_slug(slug)
     proxy = ctx.make_proxy("Event", id_)
 
-    proxy.id = sha1(str(data).lower().strip().encode()).hexdigest()
+    proxy.id = sha1(str(data.get("thema") + data.get("datum")).lower().strip().encode()).hexdigest()
 
     proxy.add("name", data.get("thema"))
 
