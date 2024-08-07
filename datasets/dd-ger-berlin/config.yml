@@ -10,7 +10,7 @@ extract:
         read:
           options:
             sep: ";"
-            encoding: latin
+            encoding: utf-8
             dtype: str
 transform:
   handler: /datasets/dd-ger-berlin/transform.py:handle
