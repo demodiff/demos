@@ -10,10 +10,11 @@ extract:
         read:
           options:
             sep: ";"
-            encoding: latin
+            encoding: utf-8
             dtype: str
 transform:
   handler: /datasets/dd-ger-berlin/transform.py:handle
 load:
   index_uri: s3://demodiff/dd-ger-berlin/index-DATE.json
   entities_uri: s3://demodiff/dd-ger-berlin/entities-DATE.ftm.json
+aggregate: false
